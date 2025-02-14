@@ -18,9 +18,9 @@ bool validMountainArray(int* arr, int arrSize){
     }
 	int tempmax=arr[maxidx];
 	int cnt=0;
-	// dividing array into two parts onepart before the maximum element and another part after the maximum element
+	// dividing array into two parts. One part, before the maximum element and another part, after the maximum element
 
-    // Checking is firstpart is strictly decreasing from the (maxidx-1 to 0)
+    // Checking is firstpart is strictly decreasing or not  from the index (maxidx-1 to 0)
 	for(int i=maxidx-1; i>=0; i--){
 		if(arr[i]>=tempmax){
 			cnt++;
@@ -28,7 +28,7 @@ bool validMountainArray(int* arr, int arrSize){
 		}
 		tempmax=arr[i];
 	}
-    // Checking second part whether it is strictly decresing or not from (maxidx+1 to arrSize-1) if and only if first part is strictly decreasing from (maxidx-1 to 0)
+    // Checking second part whether it is strictly decresing or not from  index (maxidx+1 to arrSize-1) if and only if first part is strictly decreasing from index (maxidx-1 to 0)
 	if(cnt==0){
 	for(int i=maxidx+1; i<arrSize; i++ ){
 		if(arr[i]>=arr[maxidx]){
@@ -44,9 +44,5 @@ bool validMountainArray(int* arr, int arrSize){
     }else{
 	return false;
 }
-
-
-
-
 
 }
