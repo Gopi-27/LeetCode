@@ -19,9 +19,6 @@ int* pivotArray(int* nums, int numsSize, int pivot, int* returnSize) {
     int lidx=0;
     int eidx=lcnt;
     int hidx=lcnt+ecnt;
-    for(int i=eidx ; i<eidx+ecnt; i++){
-        Arr[i]=pivot;
-    }
     for(int i=0; i<numsSize; i++){
         if(nums[i]<pivot){
             Arr[lidx]=nums[i];
@@ -29,6 +26,9 @@ int* pivotArray(int* nums, int numsSize, int pivot, int* returnSize) {
         }else if(nums[i]>pivot){
             Arr[hidx]=nums[i];
             hidx++;
+        }else{
+           Arr[eidx]=nums[i];
+           eidx++;
         }
     }
     return Arr;
