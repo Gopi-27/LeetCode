@@ -5,37 +5,19 @@
  *     struct ListNode *next;
  * };
  */
+ typedef struct ListNode Node;
 struct ListNode* middleNode(struct ListNode* head) {
-    int cnt=0;
-    struct ListNode * temp=head;
-    while(temp!=NULL){
-        cnt++;
-        temp=temp->next;
-    }
-    if(cnt%2==0){
-        int mid=(cnt/2)+1;
-        cnt=1;
-        temp=head;
-        while(1){
-            if(cnt==mid){
-                break;
-            }
-            cnt++;
-            temp=temp->next;
-        }
-        return temp;
-        
-    }else{
-        temp=head;
-        int mid=(cnt/2)+1;
-        cnt=1;
-        while(1){
-            if(cnt==mid){
-                break;
-            }
-            cnt++;
-            temp=temp->next;
-        }
-        return temp;
-    }
+    Node * slow = head;
+	Node * fast = head;
+	while(1){
+		if(fast == NULL){
+			break;
+		}
+		if(fast->next == NULL){
+			break ;
+		}
+		fast = fast->next->next;
+		slow = slow->next;
+	}
+	return slow;
 }
