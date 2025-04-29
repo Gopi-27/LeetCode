@@ -5,10 +5,9 @@ public:
       int n = paths.size();
       for(int i = 0; i < n; i++){
             mpp[paths[i][0]]++;
-            mpp[paths[i][1]]++;
       }
       for(int i = 0; i < n; i++){
-        if(mpp[paths[i][1]] == 1)return paths[i][1];
+        if(mpp[paths[i][1]] == 0)return paths[i][1];
       }
       return "";
     }
