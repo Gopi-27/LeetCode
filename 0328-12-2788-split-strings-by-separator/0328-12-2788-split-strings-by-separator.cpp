@@ -13,11 +13,8 @@ public:
                 }
                 if(temp.size() > 0)Ans.push_back(temp);
                 if(words[i][j] == separator)j++;
-            }
-            
+            }   
         }
         return Ans;
-
-
     }
 };
