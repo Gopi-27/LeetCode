@@ -1,15 +1,15 @@
 class Solution {
 public:
-    int rec(int i,int j,vector<vector<int>>& Dp){
-        if(i < 0 || j  < 0)return 0;
-        if(i == 0 && j == 0)return 1;
-        if(Dp[i][j] != -1)return Dp[i][j];
-        int ans = rec(i - 1,j,Dp);
-        ans += rec(i,j - 1,Dp);
-        return Dp[i][j] = ans;
-    }
     int uniquePaths(int n, int m) {
-        vector<vector<int>>Dp(n,vector<int>(m,-1));
-        return rec(n - 1,m - 1,Dp);
+        vector<vector<int>>Dp(n,vector<int>(m));
+        // tabulation
+        Dp[0][0] = 1;
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < m; j++){
+               if(j > 0)Dp[i][j] = Dp[i][j - 1];
+               if(i > 0)Dp[i][j] += Dp[i - 1][j];
+            }
+        }
+        return Dp[n - 1][m - 1];
     }
 };
