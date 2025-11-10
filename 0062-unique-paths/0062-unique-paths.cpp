@@ -1,15 +1,17 @@
 class Solution {
 public:
     int uniquePaths(int n, int m) {
-        vector<vector<int>>Dp(n,vector<int>(m));
-        // tabulation
-        Dp[0][0] = 1;
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < m; j++){
-               if(j > 0)Dp[i][j] = Dp[i][j - 1];
-               if(i > 0)Dp[i][j] += Dp[i - 1][j];
+        if(n == 1)return 1;
+        // space optimization
+        vector<int>prev(m,1);
+        vector<int>curr(m);
+        for(int i = 1; i < n; i++){
+            curr[0] = 1;
+            for(int j = 1; j < m; j++){
+               curr[j] = curr[j - 1] + prev[j];
             }
+            prev = curr;
         }
-        return Dp[n - 1][m - 1];
+        return curr[m - 1];
     }
 };
