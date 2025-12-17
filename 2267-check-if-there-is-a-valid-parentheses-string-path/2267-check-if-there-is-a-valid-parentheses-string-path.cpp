@@ -24,8 +24,34 @@ public:
     bool hasValidPath(vector<vector<char>>& grid) {
         int m = grid.size();
         int n = grid[0].size();
-        vector<vector<vector<int>>>Dp(m,vector<vector<int>>(n,vector<int>(m + n, -1)));
-        return rec(0,0,0,grid,Dp);
+        if(grid[m - 1][n - 1] == '(')return false;
+        // vector<vector<vector<int>>>Dp(m,vector<vector<int>>(n,vector<int>(m + n, -1)));
+        vector<vector<vector<bool>>>Dp(m,vector<vector<bool>>(n,vector<bool>(m + n + 1,false)));
+        // Tabulation
+        
+        for(int i = m - 1; i >= 0; i--){
+            for(int j = n - 1; j >= 0; j--){
+                for(int open = 0; open < m + n; open++){
+                    if(i == m - 1 && j == n - 1 && open == 1){
+                        Dp[m - 1][n - 1][1] = true;
+                        continue;
+                    }
+                    bool flag = 0;
+                    if(grid[i][j] == '('){
+                        if(j + 1 < n)flag = Dp[i][j + 1][open + 1];
+                        if(i + 1 < m)flag |= Dp[i + 1][j][open + 1];
+                    }else{
+                        // close
+                        if(open){
+                            if(j + 1 < n)flag = Dp[i][j + 1][open - 1];
+                            if(i + 1 < m)flag |= Dp[i + 1][j][open - 1];
+                        }
+                    }
+                    Dp[i][j][open] = flag;
+                }
+            }
+        }
+        return Dp[0][0][0];
     }
 };
 // ["(","(","("]
