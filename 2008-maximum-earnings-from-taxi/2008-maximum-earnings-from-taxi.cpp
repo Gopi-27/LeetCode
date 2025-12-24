@@ -11,18 +11,27 @@ public:
         }
         return low;
     }
-    long long rec(int level,vector<vector<int>>& rides,vector<long long>& Dp){
-        if(level >= rides.size())return 0;
-        if(Dp[level] != -1)return Dp[level];
-        long long  ans = rides[level][1] - rides[level][0] + rides[level][2] + rec(GetNextRide(rides,level),rides,Dp);
-        ans = max(ans,rec(level + 1,rides,Dp));
+    // long long rec(int level,vector<vector<int>>& rides,vector<long long>& Dp){
+    //     if(level >= rides.size())return 0;
+    //     if(Dp[level] != -1)return Dp[level];
+    //     long long  ans = rides[level][1] - rides[level][0] + rides[level][2] + rec(GetNextRide(rides,level),rides,Dp);
+    //     ans = max(ans,rec(level + 1,rides,Dp));
 
-        return Dp[level] = ans;
-    }
+    //     return Dp[level] = ans;
+    // }
     long long maxTaxiEarnings(int n, vector<vector<int>>& rides) {
         sort(rides.begin(),rides.end());
         int m = rides.size();
-        vector<long long>Dp(m,-1);
-        return rec(0,rides,Dp);
+        vector<long long>Dp(m);
+
+        for(int i = m - 1; i >= 0; i--){
+            long long ans = rides[i][1] - rides[i][0] + rides[i][2];
+            int nxtride = GetNextRide(rides,i);
+            if(nxtride < m)ans +=  Dp[nxtride];
+            if(i + 1 < m)ans = max(ans,Dp[i + 1]);
+            Dp[i] = ans;
+        }
+
+        return Dp[0];
     }
 };
