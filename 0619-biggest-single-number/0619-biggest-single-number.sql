@@ -1,0 +1,8 @@
+/* Write your PL/SQL query statement below */
+
+WITH cte AS (
+    SELECT num
+    FROM mynumbers
+    GROUP BY num
+    HAVING COUNT(*) = 1;
+)SELECT MAX(num) AS num FROM cte;
