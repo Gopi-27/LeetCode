@@ -6,5 +6,5 @@ FROM weather w
 WHERE w.temperature > (
                         SELECT t.temperature
                         FROM weather t 
-                        WHERE t.recorddate = w.recorddate - 1;
-                    )
+                        WHERE t.recorddate = w.recorddate - 1
+                    );
