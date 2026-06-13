@@ -1,19 +1,15 @@
 class Solution {
 public:
     vector<bool> checkIfPrerequisite(int n, vector<vector<int>>& prerequisites, vector<vector<int>>& queries) {
-        vector<vector<int>>Adj(n);
-        for(vector<int>& p : prerequisites)Adj[p[1]].push_back(p[0]);
         vector<vector<bool>>Preq(n,vector<bool>(n));
-        for(int i = 0; i < n; i++){
-            queue<int>Q;
-            Q.push(i);
-            Preq[i][i] = 1;
-            while(!Q.empty()){
-                int u = Q.front();Q.pop();
-                for(int& v : Adj[u]){
-                    if(!Preq[i][v]){
-                        Q.push(v);
-                        Preq[i][v] = 1;
+        for(vector<int>& p : prerequisites)Preq[p[1]][p[0]] = 1;
+        for(int t = 0; t < n; t++){
+            for(int i = 0; i < n; i++){
+                if(Preq[i][t]){
+                    for(int j = 0; j < n; j++){
+                        if(Preq[t][j]){
+                            Preq[i][j] = 1;
+                        }
                     }
                 }
             }
