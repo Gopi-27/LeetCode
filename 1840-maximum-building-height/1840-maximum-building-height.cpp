@@ -14,7 +14,8 @@ public:
         for(int i = 1; i < l; i++){
             int d = rtr[i][0] - rtr[i - 1][0];
             rtr[i][1] = min(rtr[i][1],rtr[i - 1][1] + d);
-            ans = max(ans,(d + abs(rtr[i - 1][1] + rtr[i][1]))/2);
+
+            ans = max(ans, max(rtr[i - 1][1],rtr[i][1]) + (d - abs(rtr[i - 1][1] - rtr[i][1])) / 2);
         }
         return ans;
     }
