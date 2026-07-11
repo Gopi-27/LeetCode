@@ -21,7 +21,7 @@ public:
         for(int& u : Adj[v]){
             if(!Vis[u]){
                 Ans[u]  += (Ans[v] - Ans[u] - Cnt[u]) + (Cnt[v] - Cnt[u]);
-                cout << u <<" "<< Ans[u] << endl;
+                // cout << u <<" "<< Ans[u] << endl;
                 Cnt[u] = Cnt[v];
                 rec(u,Adj,Vis,Ans,Cnt);
             }
